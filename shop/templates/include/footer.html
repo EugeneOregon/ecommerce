@@ -1,0 +1,47 @@
+{% load shop_tags %}
+
+<footer class="footer">
+    <div class="footer__container">
+        <div class="footer__body">
+            <div class="footer__main">
+                <a href="{% url 'home' %}" class="footer__logo _footer-title">Взуттєво</a>
+                <div class="footer__text">Що не кажи</div>
+                <div class="footer__contacts">
+                    <a href="{% url 'anyway' %}" class="footer__location">Дніпро, Україна</a>
+                    <a href="tel:+380662661046" class="footer__phone">+38 000 123 45 67</a>
+                </div>
+            </div>
+            <div class="footer__menu menu-footer one">
+                <div class="menu-footer__column">
+                    <button type="button" class="menu-footer__title _footer-title">Каталог<span
+                            class="material-icons _foter-icon">expand_more</span></button>
+                    <ul class="menu-footer__list">
+                        {% get_categories as categories %}
+                        {% for category in categories %}
+                        <li><a href="{{ category.get_absolute_url }}" class="menu-footer__link">{{ category.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="menu-footer__column">
+                    <button type="button" class="menu-footer__title _footer-title">Співпраця<span
+                            class="material-icons _foter-icon">expand_more</span></button>
+                    <ul class="menu-footer__list">
+                        <li><a href="{% url 'anyway' %}" class="menu-footer__link">Умови</a></li>
+                        <li><a href="{% url 'anyway' %}" class="menu-footer__link">Dropshipping</a></li>
+                        <li><a href="{% url 'anyway' %}" class="menu-footer__link">Опт</a></li>
+                    </ul>
+                </div>
+                <div class="menu-footer__column">
+                    <button type="button" class="menu-footer__title _footer-title">Інформація<span
+                            class="material-icons _foter-icon">expand_more</span></button>
+                    <ul class="menu-footer__list">
+                        {% get_footer_points as points %}
+                        {% for point in points %}
+                        <li><a href="{% url 'anyway' %}" class="menu-footer__link">{{ point.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

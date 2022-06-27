@@ -1,0 +1,32 @@
+<div class="product-filter">
+    <form action="{% url 'filter' %}" method="get">
+        <div class="product-filter__title">Розмір</div>
+        <div class="product-filter__value">
+            {% for size in view.get_sizes %}
+            <div class="product-filter__checkbox">
+                <input type="checkbox" class="checked" name="size" value="{{ size.id }}">
+                <span class="span-editContent">{{ size.size }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="product-filter__title">Тип</div>
+        <div class="product-filter__value">
+            {% for type in view.get_types %}
+            <div class="product-filter__checkbox">
+                <input type="checkbox" class="checked" name="type" value="{{ type.id }}">
+                <span class="span-editContent">{{ type.type }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="product-filter__title">Стиль</div>
+        <div class="product-filter__value">
+            {% for style in view.get_styles %}
+            <div class="product-filter__checkbox">
+                <input type="checkbox" class="checked" name="style" value="{{ style.id }}">
+                <span class="span-editContent">{{ style.style }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="product-card__button">Пошук</button>
+    </form>
+</div>

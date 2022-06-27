@@ -1,0 +1,22 @@
+{% load static %}
+{% load shop_tags %}
+
+<header class="header">
+    <div class="header__container">
+        <a href="{% url 'home' %}" class="header__logo"><img src="{% static 'shop/images/logo.png' %}" alt=""
+                                                             class="img">Взуттєво</a>
+        <div class="header__menu menu">
+            <div class="menu__icon">
+                <span></span>
+            </div>
+            <nav class="menu__body">
+                <ul class="menu__list">
+                    {% get_points as points %}
+                    {% for point in points %}
+                    <li><a href="{% url point.url_name %}" class="menu__link">{{ point.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>

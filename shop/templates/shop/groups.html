@@ -1,0 +1,9 @@
+{% load shop_tags %}
+
+{% block content %}
+
+{% get_all_categories %}
+
+{% include 'shop/product_list.html' %}
+
+{% endblock %}

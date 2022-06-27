@@ -1,0 +1,16 @@
+<div class="groups">
+    <div class="groups__wrapper">
+        <div class="groups__container">
+            {% for category in categories %}
+            {% if category.image %}
+            <div class="groups__card">
+                <a href="{{ category.get_absolute_url }}">
+                    <img src="{{ category.image.url }}" alt="">
+                    <div class="groups__title">{{ category.name }}</div>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

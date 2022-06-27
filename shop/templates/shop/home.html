@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'include/slider.html' %}
+<div class="product-wrapper">
+    {% include 'include/sidebar.html' %}
+    <div class="product-list">
+        <div class="product-list__title">Вітрина</div>
+        <div class="product-list__list">
+            {% for product in products %}
+            <div class="product-list__card product-card">
+                {% if product.image %}
+                <div class="product-card__img">
+                    <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt=""></a>
+                </div>
+                {% endif %}
+                <div class="product-card__content">
+                    <div class="product-card__title">{{ product.name }}</div>
+                    <div class="product-card__artic">
+                        <div class="product-card__stock">В наявності</div>
+                        <div class="product-card__code">{{ product.vendor_code }}</div>
+                    </div>
+                    <div class="product-card__price">{{ product.price }}</div>
+                    <button type="button" class="product-card__button"
+                            onclick="window.location.href = '{% url 'add_cart' product.id %}';">В кошик
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% include 'include/description.html' %}
+{% endblock %}

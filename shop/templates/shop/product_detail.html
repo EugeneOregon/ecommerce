@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load shop_tags %}
+
+{% block content %}
+
+<div class="main">
+    <div class="card__wrapper">
+        <div class="card__container">
+            <div class="card__img">
+                <img src="{{ product.image.url }}" alt="">
+            </div>
+            <div class="card__order order-items">
+                <div class="order-items__title">
+                    <h1>{{ product.name }}</h1>
+                </div>
+                <div class="order-items__price">{{ product.price }}</div>
+                <div class="order-items__specific">Склад: 80% бавовна, 15% поліамід, 5% еластан</div>
+                <div class="order-items__variety variety-list">
+                    <div class="variety-list__title">Розмір</div>
+                    <div class="variety-list__list">
+                        {% for size in product.size.all %}
+                        <div class="variety-list__item">{{ size }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="pay-button">
+                    <div class="pay-button__wrap">
+                        <div class="pay-button__button"><span class="material-icons pay__ico">remove</span></div>
+                        <div class="pay-button__count">1</div>
+                        <div class="pay-button__button"><span class="material-icons pay__ico">add</span></div>
+                    </div>
+                    <button type="button" class="pay-button__buy"
+                            onclick="window.location.href = '{% url 'add_cart' product.id %}';">Додати у кошик
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-description">
+            <p>{{ product.description }}</p>
+        </div>
+        <div class="card-other">
+            <div class="product-list__title">Схожi товари</div>
+            {% get_random_products as products %}
+            <div class="product-list__list">
+                {% for product in products %}
+                <div class="product-list__card product-card">
+                    {% if product.image %}
+                    <div class="product-card__img">
+                        <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt=""></a>
+                    </div>
+                    {% endif %}
+                    <div class="product-card__content">
+                        <div class="product-card__title">{{ product.name }}</div>
+                        <div class="product-card__artic">
+                            <div class="product-card__stock">В наявності</div>
+                            <div class="product-card__code">{{ product.vendor_code }}</div>
+                        </div>
+                        <div class="product-card__price">{{ product.price }}</div>
+                        <button type="button" class="product-card__button"
+                                onclick="window.location.href = '{% url 'add_cart' product.id %}';">В кошик
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

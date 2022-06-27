@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main">
+    <div class="card__wrapper">
+        {% if not cart_items %}
+        <div class="cart-title">
+            <br>
+            <h1>
+                Ваш кошик порожній
+            </h1>
+            <br>
+            <p>
+                Перейти <a href="{% url 'home' %}">сюди</a> для замовлення
+            </p>
+        </div>
+
+        {% else %}
+        <div class="cart-title">
+            <br>
+            <div>
+                <h1><strong>Кошик</strong></h1>
+            </div>
+        </div>
+        <div class="cart-detail">
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="cart-row">
+                            Ваше замовлення
+                        </th>
+                    </tr>
+                    </thead>
+                    {% for cart_item in cart_items %}
+                    <tr>
+                        <td class="cart-row">
+                            <a href="{{cart_item.product.get_url}}">
+                                <img src="{{cart_item.product.image.url}}" width="100" height="100">
+                            </a>
+                        </td>
+                        <td class="cart-row">
+                            {{cart_item.product.name}}
+                            <br>
+                            Артикул: {{cart_item.product.vendor_code}}
+                            <br>
+                            Ціна {{cart_item.product.price}}
+                            <br><br>
+                            Всього: {{cart_item.quantity}} * {{cart_item.product.price}}
+                            <br>
+                        </td>
+                        <td class="cart-row">
+                            {{cart_item.product.sub_total}}
+                        </td>
+                        {% if cart_item.quantity < cart_item.product.stock %}
+                        <td class="cart-row">
+                            <a href="{% url 'add_cart' cart_item.product.id %}"><span
+                                    class="material-icons arrow">add</span></a>
+                            <a href="{% url 'cart_remove' cart_item.product.id %}"><span
+                                    class="material-icons arrow">remove</span></a>
+                            <a href="{% url 'cart_remove_product' cart_item.product.id %}">
+                                <span class="material-icons arrow">delete</span>
+                            </a>
+                        </td>
+                        {% else %}
+                        <td class="cart-row">
+                            <a href="{% url 'cart_remove' cart_item.product.id %}"><span
+                                    class="material-icons arrow">remove</span></a>
+                            <a href="{% url 'cart_remove_product' cart_item.product.id %}"><span
+                                    class="material-icons arrow">delete</span></a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th class="cart-row">
+                            Перевірка
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="cart-row">
+                            Будь ласка перевірте ваше замовлення
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cart-row">
+                            Ваше замовлення на сумму: <strong>{{total}} грн</strong>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="cart-row">
+                    <a href="{% url 'home' %}">
+                        <button type="button" class="pay-button__buy">
+                            На головну
+                        </button>
+                    </a>
+                    <a href="{% url 'home' %}">
+                        <button type="button" class="pay-button__buy">
+                            Замовити
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% load static %}
+{% load shop_tags %}
+
+<main class="page">
+    <section class="page__main-slider main-slider">
+        <div class="main-slider__container _container">
+            <div class="main-slider__body">
+                <div class="main-slider__content content-main">
+                    <h1 class="content-main__title">Вітаємо!</h1>
+                    <div class="content-main__text">Ми раді нашій зустрічі. Тож запрошуемо Вас до нашого магазину!
+                        Переходьте до каталогу та обирайте шкарпетки для будь якого настрою та ситуації
+                    </div>
+                    <a href="groups" data-da='.main-slider__body,991.98' class="content-main__button">Каталог</a>
+                </div>
+                <div class="main-slider__slider slider-main">
+                    <div class="slider-main__controls controls-slider-main">
+                        <div class="controls-slider-main__dotts"></div>
+                        <div class="controls-slider-main__arrows slider-arrows">
+                            <button type="button" class="slider-arrow slider-arrow_prev"><span
+                                    class="material-icons arrow">navigate_before</span></button>
+                            <button type="button" class="slider-arrow slider-arrow_next"><span
+                                    class="material-icons arrow">navigate_next</span></button>
+                        </div>
+                    </div>
+                    <div class="slider-main__body _swiper">
+                        <div class="swiper-wrapper">
+                            {% get_slider as sliders %}
+                            {% for slider in sliders %}
+                            <div class="slider-main__slide swiper-slide">
+                                <div class="slider-main__image _ibg">
+                                    <img src="{{ slider.image.url }}" alt="Image">
+                                </div>
+                                <a href="#" data-swiper-parallax-opacity="0" data-swiper-parallax-x="-100%"
+                                   class="slider-main__content">
+                                    <div class="slider-main__title">Шкарпетки</div>
+                                    <div class="slider-main__text">Будь-який розмір на будь-який смак</div>
+                                    <div class="slider-main__price">Від 35 грн</div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
